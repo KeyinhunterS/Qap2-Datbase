@@ -1,0 +1,26 @@
+Querys for Problem 2
+
+Query for - Retrieve the names and stock quantities of all products.
+
+-- Get product names and stock quantities
+SELECT product_name, stock_quantity FROM products;
+
+Query for - Retrieve the product names and quantities for one of the orders placed.
+
+SELECT 
+    p.product_name, 
+    oi.quantity
+FROM order_items oi
+JOIN products p ON oi.product_id = p.id
+WHERE oi.order_id = 1;  -- Change 1 to the actual order_id you want to retrieve
+
+
+Query for - Retrieve all orders placed by a specific customer (including the ID’s of what was ordered and the quantities).
+
+SELECT 
+    o.id AS order_id, 
+    oi.product_id, 
+    oi.quantity
+FROM orders o
+JOIN order_items oi ON o.id = oi.order_id
+WHERE o.customer_id = 3;  -- Change 3 to the actual customer_id
