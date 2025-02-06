@@ -1,0 +1,37 @@
+Problem 2: Online Store INventory and Orders System
+
+Creating the Tables.
+
+-- Create Products Table
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100),
+    price DECIMAL(10,2),
+    stock_quantity INT CHECK (stock_quantity >= 0)
+);
+
+-- Create Customers Table
+CREATE TABLE customers (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100) UNIQUE
+);
+
+-- Create Orders Table
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE
+);
+
+-- Create Order Items Table (Many-to-Many)
+CREATE TABLE order_items (
+    order_id INT,
+    product_id INT,
+    quantity INT CHECK (quantity > 0),
+    PRIMARY KEY (order_id, product_id),
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
