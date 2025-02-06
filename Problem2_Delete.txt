@@ -1,0 +1,11 @@
+Deleting data.
+
+Step 1: Delete order form items first.
+
+DELETE FROM order_items
+WHERE order_id = 1;  -- Change 1 to the actual order ID
+
+Step 2: Delete order.
+
+DELETE FROM orders
+WHERE id = 1;  -- Change 1 to the actual order ID
