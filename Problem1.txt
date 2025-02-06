@@ -1,0 +1,40 @@
+Problem 1: Unitversity Course Enrollement System 
+
+Part One: Creating the Tables.
+
+-- Create Students Table
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100) UNIQUE,
+    school_enrollment_date DATE
+);
+
+-- Create Professors Table
+CREATE TABLE professors (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    department VARCHAR(100)
+);
+
+-- Create Courses Table
+CREATE TABLE courses (
+    id SERIAL PRIMARY KEY,
+    course_name VARCHAR(100),
+    course_description TEXT,
+    professor_id INT,
+    FOREIGN KEY (professor_id) REFERENCES professors(id) ON DELETE CASCADE
+);
+
+-- Create Enrollments Table (Many-to-Many)
+CREATE TABLE enrollments (
+    student_id INT,
+    course_id INT,
+    enrollment_date DATE,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
+);
+
