@@ -1,0 +1,24 @@
+Queries.
+
+This Query is for - Retrieve the full names (by full name we mean the first name and last name joined into one column, separated by a space) of all students enrolled in “Physics 101”.
+
+-- Get student names in Physics 101
+SELECT s.first_name || ' ' || s.last_name AS full_name
+FROM students s
+JOIN enrollments e ON s.id = e.student_id
+JOIN courses c ON e.course_id = c.id
+WHERE c.course_name = 'Physics 101';
+
+This Query is for - Retrieve a list of all courses along with the professor’s full name who teaches each course.
+
+SELECT 
+    c.course_name, 
+    p.first_name || ' ' || p.last_name AS professor_name
+FROM courses c
+JOIN professors p ON c.professor_id = p.id;
+
+This Query is for - Retrieve all courses that have students enrolled in them.
+
+SELECT DISTINCT c.course_name
+FROM courses c
+JOIN enrollments e ON c.id = e.course_id;
